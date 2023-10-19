@@ -7,7 +7,7 @@ public class World {
             if(i != args.length-1) {
                 System.out.print(args[i] + ", ");
             }else{
-                System.out.print(args[i]);
+                System.out.println(args[i]);
             }
         }
     }
