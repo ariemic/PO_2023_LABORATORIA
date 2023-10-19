@@ -35,7 +35,7 @@ public class OptionsParser {
 
             }
         }
-        System.out.println(Arrays.toString(directions));
+//        System.out.println(Arrays.toString(directions));
         return directions;
 
     }
