@@ -18,10 +18,12 @@ public class World {
         }
         System.out.println("Stop");
     }
+    
 
     public static void main(String[] args) {
         System.out.println("system wystartował");
         run(args);
+        OptionsParser.parseDirections(args);
         System.out.println("system zakończył działanie");
     }
 
