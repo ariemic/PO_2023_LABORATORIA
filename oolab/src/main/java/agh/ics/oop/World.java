@@ -21,6 +21,7 @@ public class World {
         MoveDirection[] directions = OptionsParser.parseDirections(args);
         run(directions);
         System.out.println("Stop");
+        System.out.println("Koniec programu");
     }
 
 }
