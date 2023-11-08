@@ -82,3 +82,4 @@ oolab/.gitignore
 oolab/gradlew.bat
 oolab/gradle/wrapper
 oolab/.gradle
+.idea
