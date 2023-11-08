@@ -46,6 +46,6 @@ oolab/.idea
 oolab/.gitignore
 oolab/gradlew.bat
 oolab/.gradle
-.gitatributes
+.gitattributes
 oolab/gradlew
-
+oolab/build
