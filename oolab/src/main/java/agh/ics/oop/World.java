@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
@@ -20,7 +21,7 @@ public class World {
 
     public static void main(String[] args) {
         System.out.println("Start");
-        MoveDirection[] directions = OptionsParser.parseDirections(args);
+        MoveDirection[] directions = OptionsParser.parseDirections(args).toArray(new MoveDirection[0]);
         run(directions);
         System.out.println("Stop");
         Vector2d position1 = new Vector2d(1,2);
@@ -33,6 +34,12 @@ public class World {
         System.out.println(direction.previous());
         System.out.println(direction.next());
         System.out.println(direction.toUnitVector());
+
+        Animal animal = new Animal(position1);
+        System.out.printf("animal position is %s%n", animal.getVector());
+        animal.move(MoveDirection.BACKWARD);
+        System.out.printf("animal position is %s%n",animal.getVector());
+
     }
 
 }
