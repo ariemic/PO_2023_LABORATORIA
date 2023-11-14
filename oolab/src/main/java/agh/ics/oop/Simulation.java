@@ -8,8 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    List<MoveDirection> moves;
-    List<Animal> animals = new ArrayList<Animal>();
+    private List<MoveDirection> moves;
+    private List<Animal> animals = new ArrayList<Animal>();
+
+    public List<MoveDirection> getMoves() {
+        return moves;
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
     public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves){
         this.moves = moves;
         //create new animals on animalPositions
@@ -23,7 +32,7 @@ public class Simulation {
         int animalCnt = animals.size();
         for (MoveDirection move: moves){
             animals.get(i%animalCnt).move(move);
-            System.out.printf("Zwięrzę %d : %s%n", i%animalCnt, animals.get(i%animalCnt).getVector().toString());
+            System.out.printf("Zwięrzę %d : %s%n", i%animalCnt, animals.get(i%animalCnt).getPosition().toString());
             i++;
         }
 

@@ -38,9 +38,9 @@ public class World {
         System.out.println(direction.toUnitVector());
 
         Animal animal = new Animal(position1);
-        System.out.printf("animal position is %s%n", animal.getVector());
+        System.out.printf("animal position is %s%n", animal.getPosition());
         animal.move(MoveDirection.BACKWARD);
-        System.out.printf("animal position is %s%n",animal.getVector());
+        System.out.printf("animal position is %s%n",animal.getPosition());
 
         List<MoveDirection> directions = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));

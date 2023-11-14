@@ -2,9 +2,9 @@ package agh.ics.oop.model;
 
 public class Animal {
     private MapDirection orientation;
-    private Vector2d vector;
-    public Animal(Vector2d vector){
-        this.vector = vector;
+    private Vector2d position;
+    public Animal(Vector2d position){
+        this.position = position;
         this.orientation = MapDirection.NORTH;
     }
 
@@ -18,10 +18,10 @@ public class Animal {
     }
 
     public boolean isAt(Vector2d position){
-        return vector.equals(position);
+        return this.position.equals(position);
     }
-    public Vector2d getVector() {
-        return vector;
+    public Vector2d getPosition() {
+        return this.position;
     }
 
     public void move(MoveDirection direction){
@@ -30,18 +30,20 @@ public class Animal {
         }else if(direction == MoveDirection.LEFT){
                orientation = orientation.previous();
         }else{
-            Vector2d newVectorPosition = vector.add(orientation.toUnitVector());
+            Vector2d newVectorPosition = position.add(orientation.toUnitVector());
             if (direction == MoveDirection.BACKWARD){
-                newVectorPosition = vector.subtract(orientation.toUnitVector());
+                newVectorPosition = position.subtract(orientation.toUnitVector());
             }
             if(Math.min(newVectorPosition.getX(), newVectorPosition.getY()) < 0 || Math.max(newVectorPosition.getX(), newVectorPosition.getY()) > 4){
                 return;
             }else{
-                vector = newVectorPosition;
+                position = newVectorPosition;
             }
         }
     }
 
-
+    public MapDirection getOrientation() {
+        return this.orientation;
+    }
 
 }
