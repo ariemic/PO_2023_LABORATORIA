@@ -1,5 +1,6 @@
-package agh.ics.oop;
+package agh.ics.oop.model;
 
+import agh.ics.oop.OptionsParser;
 import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
