@@ -19,10 +19,10 @@ public class World {
     }
 
     public static void main(String[] args) {
-        List<MoveDirection> directions = OptionsParser.parseDirections(args);
-        List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
-        WorldMap map = new RectangularMap(4,4);
-        Simulation simulation = new Simulation(positions, directions, map);
+        List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
+        List<Vector2d> positions = List.of(new Vector2d(3,3));
+        WorldMap map = new RectangularMap(3, 3);
+        Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
     }
 

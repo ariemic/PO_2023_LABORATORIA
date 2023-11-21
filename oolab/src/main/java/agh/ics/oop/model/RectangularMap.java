@@ -4,6 +4,7 @@ import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RectangularMap implements WorldMap {
     Map<Vector2d, Animal> animals = new HashMap<>();
@@ -34,7 +35,7 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public void move(Animal animal, MoveDirection direction) {
-//        if (!animals.containsKey(animal.getPosition())) return;
+        if (!animals.containsKey(animal.getPosition())) return;
         animals.remove(animal.getPosition());
         animal.move(direction, this);
         animals.put(animal.getPosition(), animal);
@@ -48,7 +49,7 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public Animal objectAt(Vector2d position) {
-//        if(!animals.containsKey(position))return null;
+        if(!animals.containsKey(position))return null;
         return animals.get(position);
     }
 
@@ -61,6 +62,14 @@ public class RectangularMap implements WorldMap {
         return animals;
     }
 
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(animals, width, height);
+    }
+
+    @Override
     public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -78,6 +87,7 @@ public class RectangularMap implements WorldMap {
         }
         return true;
     }
+
 
     public int getWidth() {
         return width;

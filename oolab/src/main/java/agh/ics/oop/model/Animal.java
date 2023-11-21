@@ -11,7 +11,7 @@ public class Animal {
     }
 
     public Animal(Vector2d position){
-        this(new Vector2d(2,2), MapDirection.NORTH);
+        this(new Vector2d(position.getX(), position.getY()), MapDirection.NORTH);
     }
 
     public Animal(){
@@ -42,18 +42,23 @@ public class Animal {
         }else if(direction == MoveDirection.LEFT){
                orientation = orientation.previous();
         }else{
-            Vector2d newVectorPosition = position.add(orientation.toUnitVector());
+            Vector2d newVectorPosition;
+            if (direction == MoveDirection.FORWARD) {
+                newVectorPosition = position.add(orientation.toUnitVector());
+                if(validator.canMoveTo(newVectorPosition)) {
+                    position = newVectorPosition;
+                }
+            }
             if (direction == MoveDirection.BACKWARD){
                 newVectorPosition = position.subtract(orientation.toUnitVector());
-            }
-//            if(Math.min(newVectorPosition.getX(), newVectorPosition.getY()) < 0 || Math.max(newVectorPosition.getX(), newVectorPosition.getY()) > 4){
-//                return;
-            if(validator.canMoveTo(newVectorPosition)) {
-                position = newVectorPosition;
+                if(validator.canMoveTo(newVectorPosition)) {
+                    position = newVectorPosition;
+                }
             }
         }
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
