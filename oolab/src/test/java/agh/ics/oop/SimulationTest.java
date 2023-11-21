@@ -4,7 +4,8 @@ import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class SimulationTest {
@@ -22,6 +23,12 @@ public class SimulationTest {
         Animal animal2 = new Animal(new Vector2d(4, 2), MapDirection.WEST);
         testMap.place(animal1);
         testMap.place(animal2);
+
+        WorldMap testMap2 = new RectangularMap(4, 4);
+        Animal animal3 = new Animal(new Vector2d(2, 3), MapDirection.NORTH);
+        Animal animal4 = new Animal(new Vector2d(1, 3), MapDirection.NORTH);
+
+        assertNotEquals(testMap2, map);
         map.equals(testMap);
     }
     @Test
