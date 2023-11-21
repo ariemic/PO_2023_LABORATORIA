@@ -1,10 +1,7 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.OptionsParser;
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -101,19 +98,6 @@ public class AnimalTest {
             animal = new Animal(new Vector2d(4, 4));
             animal.move(MoveDirection.FORWARD, map);
             assertEquals(new Vector2d(4, 4), animal.getPosition());
-        }
-        @Test
-        public void testSimulation() {
-            WorldMap map = new RectangularMap(4, 4);
-            List<Vector2d> positions = Arrays.asList(new Vector2d(2, 2), new Vector2d(3, 3));
-            String [] Data = {"f", "b", "kot", "mysz", "r", "pies", "l"};
-            List<MoveDirection> moves = OptionsParser.parseDirections(Data);
-//            Simulation simulation = new Simulation(positions, moves, map);
-//            simulation.run();
-//            assertEquals(new Vector2d(2, 3), simulation.getAnimals().get(0).getPosition());
-//            assertEquals(MapDirection.EAST, simulation.getAnimals().get(0).getOrientation());
-//            assertEquals(new Vector2d(3, 2), simulation.getAnimals().get(1).getPosition());
-//            assertEquals(MapDirection.WEST, simulation.getAnimals().get(1).getOrientation());
         }
 
 
