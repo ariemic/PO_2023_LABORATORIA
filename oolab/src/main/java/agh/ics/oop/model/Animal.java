@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
     private MapDirection orientation;
     private Vector2d position;
@@ -64,6 +66,11 @@ public class Animal {
         if (o == null || getClass() != o.getClass()) return false;
         Animal animal = (Animal) o;
         return position == animal.getPosition() && orientation == animal.getOrientation();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orientation, position);
     }
 
     public MapDirection getOrientation() {

@@ -4,7 +4,7 @@ import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SimulationTest {
@@ -16,19 +16,21 @@ public class SimulationTest {
         WorldMap map = new RectangularMap(4, 4);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
+        List<Animal> animals = simulation.getAnimals();
 
         WorldMap testMap = new RectangularMap(4,4);
         Animal animal1 = new Animal(new Vector2d(3, 4), MapDirection.SOUTH);
         Animal animal2 = new Animal(new Vector2d(4, 2), MapDirection.WEST);
+
         testMap.place(animal1);
         testMap.place(animal2);
 
-        WorldMap testMap2 = new RectangularMap(4, 4);
-        Animal animal3 = new Animal(new Vector2d(2, 3), MapDirection.NORTH);
-        Animal animal4 = new Animal(new Vector2d(1, 3), MapDirection.NORTH);
+        assertTrue(animals.get(0).isAt(animal2.getPosition()));
+        assertTrue(animals.get(1).isAt(animal1.getPosition()));
+        assertEquals(animals.get(0).getOrientation(), animal2.getOrientation());
+        assertEquals(animals.get(1).getOrientation(), animal1.getOrientation());
 
-        assertNotEquals(testMap2, map);
-        map.equals(testMap);
+//        assertEquals(testMap, map);
     }
     @Test
     public void runTest2(){
@@ -38,14 +40,19 @@ public class SimulationTest {
         WorldMap map = new RectangularMap(4, 4);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
+        List<Animal> animals = simulation.getAnimals();
+
 
         WorldMap testMap = new RectangularMap(4,4);
         Animal animal1 = new Animal(new Vector2d(3, 4), MapDirection.NORTH);
         Animal animal2 = new Animal(new Vector2d(3, 0), MapDirection.WEST);
         testMap.place(animal1);
         testMap.place(animal2);
-        map.equals(testMap);
 
+        assertTrue(animals.get(1).isAt(animal2.getPosition()));
+        assertTrue(animals.get(0).isAt(animal1.getPosition()));
+        assertEquals(animals.get(1).getOrientation(), animal2.getOrientation());
+        assertEquals(animals.get(0).getOrientation(), animal1.getOrientation());
 
     }
     @Test
@@ -56,6 +63,7 @@ public class SimulationTest {
         WorldMap map = new RectangularMap(4, 4);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
+        List<Animal> animals = simulation.getAnimals();
 
         WorldMap testMap = new RectangularMap(4,4);
         Animal animal1 = new Animal(new Vector2d(0, 3), MapDirection.NORTH);
@@ -64,7 +72,14 @@ public class SimulationTest {
         testMap.place(animal1);
         testMap.place(animal2);
         testMap.place(animal3);
-        map.equals(testMap);
+
+        assertTrue(animals.get(0).isAt(animal2.getPosition()));
+        assertTrue(animals.get(2).isAt(animal3.getPosition()));
+        assertTrue(animals.get(1).isAt(animal1.getPosition()));
+        assertEquals(animals.get(1).getOrientation(), animal1.getOrientation());
+        assertEquals(animals.get(0).getOrientation(), animal2.getOrientation());
+        assertEquals(animals.get(2).getOrientation(), animal3.getOrientation());
+
     }
 
     @Test
@@ -75,10 +90,18 @@ public class SimulationTest {
         WorldMap map = new RectangularMap(3, 3);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
-
+        List<Animal> animals = simulation.getAnimals();
         WorldMap testMap = new RectangularMap(3,3);
-        Animal animal1 = new Animal(new Vector2d(3, 2), MapDirection.NORTH);
+        Animal animal1 = new Animal(new Vector2d(3, 3), MapDirection.SOUTH);
         testMap.place(animal1);
-        map.equals(testMap);
+
+        assertTrue(animals.get(0).isAt(animal1.getPosition()));
+        assertEquals(animals.get(0).getOrientation(), animal1.getOrientation());
+
+
     }
 }
+
+
+
+

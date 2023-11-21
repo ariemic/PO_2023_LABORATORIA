@@ -49,7 +49,7 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public Animal objectAt(Vector2d position) {
-        if(!animals.containsKey(position))return null;
+        if (!animals.containsKey(position)) return null;
         return animals.get(position);
     }
 
@@ -62,30 +62,16 @@ public class RectangularMap implements WorldMap {
         return animals;
     }
 
-
-
     @Override
-    public int hashCode() {
-        return Objects.hash(animals, width, height);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RectangularMap map)) return false;
+        return getWidth() == map.getWidth() && getHeight() == map.getHeight() && Objects.equals(getAnimals(), map.getAnimals());
     }
 
     @Override
-    public boolean equals(Object o){
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RectangularMap newMap = (RectangularMap) o;
-        Map<Vector2d, Animal> newAnimals = newMap.getAnimals();
-        if (width != newMap.getWidth() || height != newMap.getHeight()) return false;
-
-        for (Vector2d key : animals.keySet()){
-            if (!newAnimals.containsKey(key)) return false;
-            if (!animals.get(key).equals(newAnimals.get(key))) return false;
-        }
-        for (Vector2d key : newAnimals.keySet()){
-            if (!animals.containsKey(key)) return false;
-            if (!animals.get(key).equals(newAnimals.get(key))) return false;
-        }
-        return true;
+    public int hashCode() {
+        return Objects.hash(getAnimals(), getWidth(), getHeight());
     }
 
 
