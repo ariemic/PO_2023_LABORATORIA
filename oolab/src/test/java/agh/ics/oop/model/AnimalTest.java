@@ -1,13 +1,8 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.OptionsParser;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 
 public class AnimalTest {
