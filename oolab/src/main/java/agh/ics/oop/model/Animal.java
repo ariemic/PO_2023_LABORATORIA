@@ -29,7 +29,7 @@ public class Animal implements WorldElement {
             case SOUTH -> "S";
         };
     }
-
+    @Override
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
