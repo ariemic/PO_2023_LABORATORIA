@@ -1,9 +1,12 @@
 package agh.ics.oop.model.interfaces;
 
 import agh.ics.oop.model.Animal;
+import agh.ics.oop.model.Boundry;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+
+import javax.swing.*;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -44,4 +47,5 @@ public interface WorldMap extends MoveValidator {
      * @return animal or null if the position is not occupied.
      */
     WorldElement objectAt(Vector2d position);
+    Boundry getCurrentBounds();
 }

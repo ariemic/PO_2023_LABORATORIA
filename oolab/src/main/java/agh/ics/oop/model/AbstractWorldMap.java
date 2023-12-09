@@ -22,6 +22,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     public AbstractWorldMap(){
         this(4,4);
     }
+
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         if(objectAt(animal.getPosition()) == animal){
             this.animals.remove(animal.getPosition());
@@ -57,5 +58,9 @@ public abstract class AbstractWorldMap implements WorldMap {
     public ArrayList<WorldElement> getElements() {
         return new ArrayList<>(animals.values());
     }
+
+    @Override
+    public abstract Boundry getCurrentBounds();
+
 }
 

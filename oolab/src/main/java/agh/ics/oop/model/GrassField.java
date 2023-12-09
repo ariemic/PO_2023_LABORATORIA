@@ -64,6 +64,12 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
+    public Boundry getCurrentBounds() {
+        //TODO add implementation
+        return null;
+    }
+
+    @Override
     public ArrayList<WorldElement> getElements() {
         ArrayList<WorldElement> values = new ArrayList<>(super.getElements());
         values.addAll(grassFields.values());
