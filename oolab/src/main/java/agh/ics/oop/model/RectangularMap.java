@@ -1,12 +1,6 @@
 package agh.ics.oop.model;
-
-import agh.ics.oop.model.enums.MoveDirection;
-import agh.ics.oop.model.interfaces.WorldMap;
-import agh.ics.oop.model.util.MapVisualizer;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class RectangularMap extends AbstractWorldMap {
     Map<Vector2d, Animal> animals = new HashMap<>();
@@ -25,6 +19,5 @@ public class RectangularMap extends AbstractWorldMap {
     public Boundry getCurrentBounds() {
         return bounds;
     }
-
 
 }
