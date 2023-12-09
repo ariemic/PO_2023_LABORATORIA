@@ -12,7 +12,7 @@ import java.util.List;
 public class Simulation {
     private final List<MoveDirection> moves;
     private final List<Animal> animals = new ArrayList<Animal>();
-    WorldMap map;
+    private final WorldMap map;
     public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves, WorldMap map){
         this.moves = moves;
         this.map = map;

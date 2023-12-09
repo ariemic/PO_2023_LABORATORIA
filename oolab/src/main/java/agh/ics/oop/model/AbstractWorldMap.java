@@ -14,6 +14,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     protected final Map<Vector2d, Animal> animals = new HashMap<>();
     protected MapVisualizer map = new MapVisualizer(this);
     protected final ArrayList<MapChangeListener> observers = new ArrayList<>();
+
     public void addObserver(MapChangeListener observer){
         observers.add(observer);
     }
@@ -37,17 +38,17 @@ public abstract class AbstractWorldMap implements WorldMap {
         }
 
         switch (direction){
-            case FORWARD -> showMessage("Zwierzak %s poruszył się do przodu".formatted(animal));
-            case BACKWARD -> showMessage("Zwierzak %s cofnął się".formatted(animal));
-            case RIGHT -> showMessage("Zwierzak %s obrócił się w prawo".formatted(animal));
-            case LEFT -> showMessage("Zwierzak %s obrócił się w lewo".formatted(animal));
+            case FORWARD -> showMessage("Animal %s moved forward".formatted(animal));
+            case BACKWARD -> showMessage("Animal %s moved backward".formatted(animal));
+            case RIGHT -> showMessage("Animal %s turned right".formatted(animal));
+            case LEFT -> showMessage("Animal %s turned left".formatted(animal));
         }
     }
 
     public void place(Animal animal) throws PositionAlreadyOccupiedException {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
-            showMessage("Zwierzak porzuszył się na pozycje " + animal.getPosition());
+            showMessage("Animal moved into position: " + animal.getPosition());
         }
         else{
             throw new PositionAlreadyOccupiedException(animal.getPosition());

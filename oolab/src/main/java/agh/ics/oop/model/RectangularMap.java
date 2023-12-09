@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RectangularMap extends AbstractWorldMap {
-    Map<Vector2d, Animal> animals = new HashMap<>();
 
     private final Boundry bounds;
     public RectangularMap(int width, int height){
