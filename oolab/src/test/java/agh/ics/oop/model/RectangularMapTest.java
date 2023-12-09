@@ -13,7 +13,7 @@ public class RectangularMapTest {
         RectangularMap map = new RectangularMap(10,10);
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(5,8));
-        Animal animal3 = new Animal(new Vector2d(4,10));
+        Animal animal3 = new Animal(new Vector2d(2,2));
         Animal animal4 = new Animal(new Vector2d(5,8));
 
         map.place(animal1);
@@ -21,8 +21,8 @@ public class RectangularMapTest {
 
         Throwable exception1 = assertThrows(PositionAlreadyOccupiedException.class, () -> map.place(animal3));
         Throwable exception2 = assertThrows(PositionAlreadyOccupiedException.class, () -> map.place(animal4));
-        assertEquals("Position (4,10) is already occupied or out of bounds",exception1.getMessage());
-        assertEquals("Position (5,8) is already occupied or out of bounds",exception2.getMessage());
+        assertEquals("Position (2,2) is already occupied",exception1.getMessage());
+        assertEquals("Position (5,8) is already occupied",exception2.getMessage());
     }
     @Test
     public void TestMove() throws PositionAlreadyOccupiedException{
