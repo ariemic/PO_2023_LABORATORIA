@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldMap;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class World {
         }
         catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
+        } catch (PositionAlreadyOccupiedException e) {
+            throw new RuntimeException(e);
         }
     }
 

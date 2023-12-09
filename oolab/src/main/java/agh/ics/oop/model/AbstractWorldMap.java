@@ -1,6 +1,7 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
@@ -21,7 +22,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     public AbstractWorldMap(){
         this(4,4);
     }
-    public void move(Animal animal, MoveDirection direction) {
+    public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         if(objectAt(animal.getPosition()) == animal){
             this.animals.remove(animal.getPosition());
             animal.move(direction,this);
@@ -29,12 +30,15 @@ public abstract class AbstractWorldMap implements WorldMap {
         }
     }
 
-    public boolean place(Animal animal) {
+    public boolean place(Animal animal) throws PositionAlreadyOccupiedException {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
             return true;
         }
-        return false;
+        else{
+            throw new PositionAlreadyOccupiedException(animal.getPosition());
+
+        }
     }
     public boolean isOccupied(Vector2d position) {
         return animals.containsKey(position);

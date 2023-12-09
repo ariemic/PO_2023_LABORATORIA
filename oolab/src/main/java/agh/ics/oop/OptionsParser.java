@@ -22,9 +22,10 @@ public class OptionsParser {
                 case "l" -> {
                     directions.add(MoveDirection.LEFT);
                 }
+                default -> throw new IllegalArgumentException(arg  + "is not legal move specification");
             }
         }
-        System.out.println(directions);
+//        System.out.println(directions);
         return directions;
     }
 }

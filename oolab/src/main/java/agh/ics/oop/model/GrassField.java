@@ -33,7 +33,7 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
 
-    public boolean place(Animal animal){
+    public boolean place(Animal animal) throws PositionAlreadyOccupiedException {
         if(canMoveTo(animal.getPosition())) {
             worldTopRightCorner = worldTopRightCorner.upperRight(animal.getPosition());
             worldDownLeftCorner = worldDownLeftCorner.lowerLeft(animal.getPosition());
@@ -42,8 +42,8 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public void move(Animal animal, MoveDirection direction) {
-        super.move(animal,direction);
+    public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
+        super.move(animal, direction);
         updateCorners();
     }
 

@@ -2,6 +2,7 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class GrassFieldTest {
     @Test
-    public void TestPlace(){
+    public void TestPlace() throws PositionAlreadyOccupiedException {
         GrassField map = new GrassField(5);
 
         Vector2d v1 = new Vector2d(2,2);
@@ -19,14 +20,14 @@ public class GrassFieldTest {
         Animal animal1 = new Animal(v1);
         Animal animal2 = new Animal(v2);
 
-        assertTrue(map.place(animal1));
-        assertTrue(map.place(animal2));
+        map.place(animal1);
+        map.place(animal2);
 
         assertTrue(animal1.isAt(v1));
         assertTrue(animal2.isAt(v2));
     }
     @Test
-    public void TestMove(){
+    public void TestMove() throws PositionAlreadyOccupiedException{
         GrassField map = new GrassField(2,new Random(150));
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(3, 1));
@@ -72,7 +73,7 @@ public class GrassFieldTest {
         assertEquals(new Vector2d(5,3),map.worldTopRightCorner);
     }
     @Test
-    public void TestIsOccupied(){
+    public void TestIsOccupied() throws PositionAlreadyOccupiedException{
         Vector2d vec1 = new Vector2d(2,2);
         Vector2d vec2 = new Vector2d(3,1);
         Vector2d vec3 = new Vector2d(3,2);
@@ -99,7 +100,7 @@ public class GrassFieldTest {
         assertTrue(map.isOccupied(vec3));
     }
     @Test
-    public void TestObjectAt(){
+    public void TestObjectAt() throws PositionAlreadyOccupiedException{
         Vector2d vec1 = new Vector2d(2,2);
         Vector2d vec2 = new Vector2d(3,1);
         Vector2d vec3 = new Vector2d(3,2);
@@ -129,7 +130,7 @@ public class GrassFieldTest {
         assertNotEquals(map2.objectAt(vec1),animal1);
     }
     @Test
-    public void TestCanMoveTo(){
+    public void TestCanMoveTo() throws PositionAlreadyOccupiedException{
         GrassField map1 = new GrassField(5,new Random(100));
         System.out.println(map1);
         Vector2d vec1 = new Vector2d(2,2);

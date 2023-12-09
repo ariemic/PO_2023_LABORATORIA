@@ -3,6 +3,7 @@ package agh.ics.oop;
 import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldMap;
 
 import java.util.ArrayList;
@@ -21,11 +22,16 @@ public class Simulation {
         }
     }
 
-    public void run(){
+    public void run() throws PositionAlreadyOccupiedException {
         int i=0;
         int animalCnt = animals.size();
         for (Animal animal: animals){
-            map.place(animal);
+            try{
+                map.place(animal);
+            }
+            catch (PositionAlreadyOccupiedException e){
+                System.out.println(e.getMessage());
+            }
         }
         System.out.println(map);
         for (MoveDirection move: moves){
