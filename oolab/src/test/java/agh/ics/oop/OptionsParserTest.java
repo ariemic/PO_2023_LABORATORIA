@@ -9,6 +9,6 @@ public class OptionsParserTest {
     public void testParseDirections() {
         String[] args = {"f", "b", "r", "ah", "l", "nah", "meh"};
         MoveDirection[] expected = {MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT};
-        assertArrayEquals(expected, OptionsParser.parseDirections(args));
+        assertArrayEquals(expected, OptionsParser.parseDirections(args).toArray(new MoveDirection[0]));
     }
 }
