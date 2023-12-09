@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.enums.MapDirection;
+import agh.ics.oop.model.enums.MoveDirection;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -42,7 +44,7 @@ public class GrassFieldTest {
         assertEquals(new Vector2d(2,1),map.worldDownLeftCorner);
         assertEquals(new Vector2d(4,3),map.worldTopRightCorner);
 
-        map.move(animal1,MoveDirection.FORWARD);
+        map.move(animal1, MoveDirection.FORWARD);
         assertTrue(animal1.isAt(new Vector2d(2,3)));
         assertEquals(MapDirection.NORTH,animal1.getOrientation());
 

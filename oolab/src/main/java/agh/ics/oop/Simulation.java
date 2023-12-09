@@ -1,16 +1,16 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.interfaces.WorldMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    private List<MoveDirection> moves;
-    private List<Animal> animals = new ArrayList<Animal>();
+    private final List<MoveDirection> moves;
+    private final List<Animal> animals = new ArrayList<Animal>();
     WorldMap map;
     public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves, WorldMap map){
         this.moves = moves;

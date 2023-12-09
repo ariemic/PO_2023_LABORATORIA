@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.enums.MapDirection;
+import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.interfaces.WorldMap;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 

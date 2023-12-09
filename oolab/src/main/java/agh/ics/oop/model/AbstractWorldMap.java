@@ -1,11 +1,14 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.interfaces.WorldElement;
+import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-public abstract class AbstractWorldMap implements WorldMap{
+public abstract class AbstractWorldMap implements WorldMap {
     protected final Map<Vector2d, Animal> animals = new HashMap<>();
     protected Vector2d worldTopRightCorner;
     protected Vector2d worldDownLeftCorner;

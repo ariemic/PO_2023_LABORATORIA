@@ -1,6 +1,9 @@
 package agh.ics.oop.model;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import agh.ics.oop.model.enums.MapDirection;
+import agh.ics.oop.model.enums.MoveDirection;
 import org.junit.jupiter.api.Test;
 
 public class RectangularMapTest {
@@ -30,7 +33,7 @@ public class RectangularMapTest {
         map.place(animal3);
         map.place(animal4);
 
-        map.move(animal1,MoveDirection.FORWARD);
+        map.move(animal1, MoveDirection.FORWARD);
         assertTrue(animal1.isAt(new Vector2d(2,3)));
         assertEquals(MapDirection.NORTH,animal1.getOrientation());
 
