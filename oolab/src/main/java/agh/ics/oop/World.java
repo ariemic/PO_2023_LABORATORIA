@@ -25,8 +25,9 @@ public class World {
             ArrayList<Vector2d> positions2 = new ArrayList<>(List.of(new Vector2d(7, 8), new Vector2d(3, 4),new Vector2d(2,8)));
             Simulation simulation2 = new Simulation(positions2, OptionsParser.parseDirections(args2), map2);
 
-            SimulationEngine simulationEngine = new SimulationEngine(new ArrayList<>(List.of(simulation1, simulation2)));
+            SimulationEngine simulationEngine = new SimulationEngine(new ArrayList<>(List.of(simulation1, simulation2)), 4);
             simulationEngine.runSync();
+            simulationEngine.runAsync();
         }
         catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
