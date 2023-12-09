@@ -13,9 +13,9 @@ public class SimulationEngine {
     public SimulationEngine(ArrayList<Simulation> simulations){
         this.simulations = simulations;
         this.threads = new ArrayList<>();
-        for(Simulation simulation: simulations){
-            threads.add(new Thread(simulation));
-        }
+//        for(Simulation simulation: simulations){
+//            threads.add(new Thread(simulation));
+//        }
 
     }
     public void runSync() throws PositionAlreadyOccupiedException{
