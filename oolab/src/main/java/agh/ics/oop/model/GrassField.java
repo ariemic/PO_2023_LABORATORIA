@@ -14,11 +14,12 @@ public class GrassField extends AbstractWorldMap{
     private Boundry worldBounds;
     private final Boundry grassBounds;
 
-    public GrassField(int grassNumber){
-        this(grassNumber,new Random());
+    public GrassField(int grassNumber, int mapID){
+        this(grassNumber,new Random(), mapID);
     }
 
-    public GrassField(int grassNumber,Random seed){
+    public GrassField(int grassNumber,Random seed, int mapID){
+        super(mapID);
         Vector2d worldTopRightCorner = new Vector2d(0, 0);
         Vector2d worldDownLeftCorner = new Vector2d((int)(sqrt(grassNumber * 10)),(int) (sqrt(grassNumber * 10)));
 
