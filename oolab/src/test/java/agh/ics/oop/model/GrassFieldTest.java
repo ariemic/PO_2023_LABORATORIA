@@ -26,6 +26,7 @@ public class GrassFieldTest {
         assertTrue(animal1.isAt(v1));
         assertTrue(animal2.isAt(v2));
     }
+    //TODO TestMove() give errors -> repair
     @Test
     public void TestMove() throws PositionAlreadyOccupiedException{
         GrassField map = new GrassField(2,new Random(150));

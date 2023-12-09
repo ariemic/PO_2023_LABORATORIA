@@ -10,16 +10,16 @@ import static java.lang.Math.sqrt;
 public class GrassField extends AbstractWorldMap{
 
     private final Map<Vector2d, Grass> grassFields = new HashMap<>();
-    private final Vector2d grassTopRightCorner;
-    private final Vector2d grassDownLeftCorner;
+    private Boundry worldBounds;
+    private final Boundry grassBounds;
 
     public GrassField(int grassNumber){
         this(grassNumber,new Random());
     }
 
     public GrassField(int grassNumber,Random seed){
-        worldTopRightCorner = new Vector2d(0, 0);
-        worldDownLeftCorner = new Vector2d((int)(sqrt(grassNumber * 10)),(int) (sqrt(grassNumber * 10)));
+        Vector2d worldTopRightCorner = new Vector2d(0, 0);
+        Vector2d worldDownLeftCorner = new Vector2d((int)(sqrt(grassNumber * 10)),(int) (sqrt(grassNumber * 10)));
 
         PositionsGenerator positions = new PositionsGenerator(worldDownLeftCorner.getX(), worldDownLeftCorner.getY(),grassNumber,seed);
         for(Vector2d grassPosition : positions){
@@ -27,12 +27,11 @@ public class GrassField extends AbstractWorldMap{
             worldDownLeftCorner = worldDownLeftCorner.lowerLeft(grassPosition);
             worldTopRightCorner = worldTopRightCorner.upperRight(grassPosition);
         }
-        grassTopRightCorner = worldTopRightCorner;
-        grassDownLeftCorner = worldDownLeftCorner;
+        this.grassBounds = new Boundry(worldDownLeftCorner, worldTopRightCorner);
+        this.worldBounds = new Boundry(worldDownLeftCorner, worldTopRightCorner);
     }
 
     @Override
-
     public boolean place(Animal animal) throws PositionAlreadyOccupiedException {
         if(canMoveTo(animal.getPosition())) {
             worldTopRightCorner = worldTopRightCorner.upperRight(animal.getPosition());
@@ -48,12 +47,13 @@ public class GrassField extends AbstractWorldMap{
     }
 
     public void updateCorners(){
-        worldDownLeftCorner = grassDownLeftCorner;
-        worldTopRightCorner = grassTopRightCorner;
-        animals.forEach((key,value) -> {
-            worldDownLeftCorner = worldDownLeftCorner.lowerLeft(key);
-            worldTopRightCorner = worldTopRightCorner.upperRight(key);
-        });
+        Vector2d worldDownLeftCorner = grassBounds.leftDownCorner();
+        Vector2d worldTopRightCorner = grassBounds.rightUpperCorner();
+        for(Vector2d position: animals.keySet()){
+            worldDownLeftCorner = worldDownLeftCorner.lowerLeft(position);
+            worldTopRightCorner = worldTopRightCorner.upperRight(position);
+        }
+        worldBounds = new Boundry(worldDownLeftCorner, worldTopRightCorner);
     }
     @Override
     public WorldElement objectAt(Vector2d position) {
@@ -65,8 +65,7 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public Boundry getCurrentBounds() {
-        //TODO add implementation
-        return null;
+        return worldBounds;
     }
 
     @Override

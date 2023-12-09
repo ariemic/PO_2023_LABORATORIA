@@ -47,20 +47,21 @@ public abstract class AbstractWorldMap implements WorldMap {
     public WorldElement objectAt(Vector2d position) {
         return animals.get(position);
     }
-    @Override
-    public String toString() {
-        return map.draw(worldDownLeftCorner, worldTopRightCorner);
-    }
     public boolean canMoveTo(Vector2d position) {
         return !isOccupied(position);
     }
-
     public ArrayList<WorldElement> getElements() {
         return new ArrayList<>(animals.values());
     }
 
     @Override
     public abstract Boundry getCurrentBounds();
+
+    @Override
+    public String toString() {
+        Boundry bounds = getCurrentBounds();
+        return map.draw(bounds.leftDownCorner(), bounds.rightUpperCorner());
+    }
 
 }
 
