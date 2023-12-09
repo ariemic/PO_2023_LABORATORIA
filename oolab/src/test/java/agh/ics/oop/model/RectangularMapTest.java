@@ -16,11 +16,13 @@ public class RectangularMapTest {
         Animal animal3 = new Animal(new Vector2d(4,10));
         Animal animal4 = new Animal(new Vector2d(5,8));
 
-        assertTrue(map.place(animal1));
-        assertTrue(map.place(animal2));
-        //TODO repair placing animals on map, something is wrong, test upside down doesn't work
-//        assertFalse(map.place(animal3));
-//        assertFalse(map.place(animal4));
+        map.place(animal1);
+        map.place(animal2);
+
+        Throwable exception1 = assertThrows(PositionAlreadyOccupiedException.class, () -> map.place(animal3));
+        Throwable exception2 = assertThrows(PositionAlreadyOccupiedException.class, () -> map.place(animal4));
+        assertEquals("Position (4,10) is already occupied or out of bounds",exception1.getMessage());
+        assertEquals("Position (5,8) is already occupied or out of bounds",exception2.getMessage());
     }
     @Test
     public void TestMove() throws PositionAlreadyOccupiedException{

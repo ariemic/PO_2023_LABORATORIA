@@ -26,7 +26,7 @@ public class GrassFieldTest {
         assertTrue(animal1.isAt(v1));
         assertTrue(animal2.isAt(v2));
     }
-    //TODO TestMove() give errors -> repair
+   
     @Test
     public void TestMove() throws PositionAlreadyOccupiedException{
         GrassField map = new GrassField(2,new Random(150));
@@ -35,16 +35,16 @@ public class GrassFieldTest {
         Animal animal3 = new Animal(new Vector2d(4,3));
         Animal animal4 = new Animal(new Vector2d(2,1));
 
-        assertEquals(new Vector2d(2,1),map.worldDownLeftCorner);
-        assertEquals(new Vector2d(4,2),map.worldTopRightCorner);
+        assertEquals(new Vector2d(2,1),map.getCurrentBounds().leftDownCorner());
+        assertEquals(new Vector2d(4,2),map.getCurrentBounds().rightUpperCorner());
 
         map.place(animal1);
         map.place(animal2);
         map.place(animal3);
         map.place(animal4);
 
-        assertEquals(new Vector2d(2,1),map.worldDownLeftCorner);
-        assertEquals(new Vector2d(4,3),map.worldTopRightCorner);
+        assertEquals(new Vector2d(2,1),map.getCurrentBounds().leftDownCorner());
+        assertEquals(new Vector2d(4,3),map.getCurrentBounds().rightUpperCorner());
 
         map.move(animal1, MoveDirection.FORWARD);
         assertTrue(animal1.isAt(new Vector2d(2,3)));
@@ -70,8 +70,8 @@ public class GrassFieldTest {
         map.move(animal2,MoveDirection.FORWARD);
         assertTrue(animal2.isAt(new Vector2d(2,1)));
 
-        assertEquals(new Vector2d(2,0),map.worldDownLeftCorner);
-        assertEquals(new Vector2d(5,3),map.worldTopRightCorner);
+        assertEquals(new Vector2d(2,0),map.getCurrentBounds().leftDownCorner());
+        assertEquals(new Vector2d(5,3),map.getCurrentBounds().rightUpperCorner());
     }
     @Test
     public void TestIsOccupied() throws PositionAlreadyOccupiedException{
