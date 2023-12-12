@@ -6,6 +6,8 @@ import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
+import java.util.ArrayList;
+
 /**
  * The interface responsible for interacting with the map of the world.
  * Assumes that Vector2d and MoveDirection classes are defined.
@@ -44,6 +46,7 @@ public interface WorldMap extends MoveValidator {
      * @return animal or null if the position is not occupied.
      */
     WorldElement objectAt(Vector2d position);
+    ArrayList<WorldElement> getElements();
     Boundry getCurrentBounds();
 
     int getId();

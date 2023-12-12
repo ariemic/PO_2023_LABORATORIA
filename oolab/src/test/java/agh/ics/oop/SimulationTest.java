@@ -1,10 +1,12 @@
 package agh.ics.oop;
 
+import agh.ics.oop.Simulation;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldMap;
+import agh.ics.oop.model.util.OptionsParser;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 

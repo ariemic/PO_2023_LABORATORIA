@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class SimulationEngine implements Runnable {
+public class SimulationEngine {
     //bedzie wywooływac wiele symulacji asynchronicznie
     private final ArrayList<Simulation> simulations;
     private final List<Thread> threads;
@@ -20,7 +20,7 @@ public class SimulationEngine implements Runnable {
         this.simulations = simulations;
         this.threads = new ArrayList<>();
         for(Simulation simulation: simulations){
-            threads.add(new Thread((Runnable) simulation));
+            threads.add(new Thread(simulation));
         }
 
     }
@@ -45,12 +45,8 @@ public class SimulationEngine implements Runnable {
 
     public void runAsyncInThreadPool() throws InterruptedException {
         for (Simulation simulation : simulations){
-            executorService.submit((Runnable) simulation);
+            executorService.submit(simulation);
         }
     }
 
-    @Override
-    public void run() {
-        System.out.println("Thread started.");
-    }
 }

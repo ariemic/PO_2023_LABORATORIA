@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.ics.oop.model.util;
 
 import agh.ics.oop.model.enums.MoveDirection;
 
@@ -22,10 +22,9 @@ public class OptionsParser {
                 case "l" -> {
                     directions.add(MoveDirection.LEFT);
                 }
-                default -> throw new IllegalArgumentException(arg  + "is not legal move specification");
+                default -> throw new IllegalArgumentException(arg  + " is not legal move specification");
             }
         }
-//        System.out.println(directions);
         return directions;
     }
 }

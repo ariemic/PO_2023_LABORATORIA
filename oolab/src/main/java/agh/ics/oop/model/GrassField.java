@@ -2,8 +2,8 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldElement;
+import agh.ics.oop.model.util.PositionsGenerator;
 
-import java.security.AuthProvider;
 import java.util.*;
 
 import static java.lang.Math.sqrt;
@@ -36,13 +36,13 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public void place(Animal animal) throws PositionAlreadyOccupiedException {
         super.place(animal);
-        updateCorners();
+//        updateCorners();
     }
 
     @Override
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         super.move(animal, direction);
-        updateCorners();
+//        updateCorners();
     }
 
     public void updateCorners(){
@@ -64,6 +64,7 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public Boundry getCurrentBounds() {
+        updateCorners();
         return worldBounds;
     }
 
