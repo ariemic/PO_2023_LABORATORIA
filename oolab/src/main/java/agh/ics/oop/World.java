@@ -3,6 +3,7 @@ package agh.ics.oop;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.util.ConsoleMapDisplay;
 import agh.ics.oop.model.util.OptionsParser;
+import javafx.application.Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class World {
 
     public static void main(String[] args) throws InterruptedException {
+        Application.launch(SimulationApp.class, args);
         try {
             ConsoleMapDisplay observer = new ConsoleMapDisplay();
             String[] args1 = {"f", "r", "f", "l", "l", "l", "f", "f", "f", "b"};
