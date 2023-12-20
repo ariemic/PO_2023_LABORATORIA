@@ -36,13 +36,13 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public void place(Animal animal) throws PositionAlreadyOccupiedException {
         super.place(animal);
-//        updateCorners();
+
     }
 
     @Override
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         super.move(animal, direction);
-//        updateCorners();
+
     }
 
     public void updateCorners(){
