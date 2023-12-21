@@ -25,6 +25,6 @@
     </top>
     <center>
         <Label fx:id="testMap" />
-<!--        <GridPane fx:id="gridMap" gridLinesVisible="true" />-->
+        <GridPane fx:id="gridMap" gridLinesVisible="true" />
     </center>
 </BorderPane>
