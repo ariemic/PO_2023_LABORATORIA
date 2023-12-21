@@ -6,10 +6,12 @@ import agh.ics.oop.model.Boundry;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.interfaces.MapChangeListener;
+import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.OptionsParser;
 
 import javafx.application.Platform;
+import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimulationPresenter implements MapChangeListener{
-    public Label testMap;
     private WorldMap map;
     public Button startBtn;
     public TextField getParameters;
@@ -33,12 +34,22 @@ public class SimulationPresenter implements MapChangeListener{
     }
 
     private void drawMap(){
-        testMap.setText(String.valueOf(map));
         Boundry bounds = this.map.getCurrentBounds();
         int width = bounds.rightUpperCorner().getX() - bounds.leftDownCorner().getX() + 1;
         int height = bounds.rightUpperCorner().getY() - bounds.leftDownCorner().getY() + 1;
         clearGrid();
         createGrid(width, height, bounds);
+        putElements(height, bounds);
+    }
+
+    private void putElements(int height, Boundry bounds) {
+        for(WorldElement element: map.getElements()){
+            int newY = element.getPosition().getX() - bounds.leftDownCorner().getX() + 1;
+            int newX = height - ( element.getPosition().getY() - bounds.leftDownCorner().getY()); //because I input values inot column from biggest to smallest
+            Label elem = new Label(element.toString());
+            gridMap.add(elem, newY, newX);
+            GridPane.setHalignment(elem, HPos.CENTER);
+        }
     }
 
     private void clearGrid() {
@@ -52,12 +63,24 @@ public class SimulationPresenter implements MapChangeListener{
         gridMap.getRowConstraints().add(new RowConstraints(30));
         Label separator = new Label("y\\x");
         gridMap.add(separator, 0, 0);
-        for(int i=0; i <= width; i++){
-            for(int j = 0; j <= height; j++){ //to od drugiej strony musze isc
-                for(int k=-3; k <= 5; k++){
-                    gridMap.add(k,);
-                }
-            }
+        GridPane.setHalignment(separator, HPos.CENTER);
+
+        //problem z tworzeniem cyfr
+        for(int i=1; i <= width; i++){
+            gridMap.getColumnConstraints().add(new ColumnConstraints(30));
+//            Label digit = new Label(String.valueOf(i));
+            Label digit = new Label(String.valueOf(i+bounds.leftDownCorner().getX()));
+            gridMap.add(digit, i, 0); //row
+            GridPane.setHalignment(digit, HPos.CENTER);
+        }
+//        int j = height;
+        for(int i=1; i <= height; i++){
+            gridMap.getRowConstraints().add(new RowConstraints(30));
+//            Label digit = new Label(String.valueOf(j));
+            Label digit = new Label(String.valueOf(height+bounds.leftDownCorner().getY()-i));
+            gridMap.add(digit, 0, i);
+            GridPane.setHalignment(digit, HPos.CENTER);
+//            j--;
         }
 
 
