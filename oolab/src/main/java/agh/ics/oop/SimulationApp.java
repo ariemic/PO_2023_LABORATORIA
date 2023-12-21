@@ -3,16 +3,13 @@ package agh.ics.oop;
 import agh.ics.oop.model.GrassField;
 import agh.ics.oop.presenter.SimulationPresenter;
 import javafx.application.Application;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
-import java.util.List;
 
 public class SimulationApp extends Application {
 
@@ -26,6 +23,7 @@ public class SimulationApp extends Application {
         BorderPane viewRoot = loader.load();
 
         SimulationPresenter presenter = loader.getController();
+//        presenter.onSimulationStartClicked(); runs as you click start button, no need to run it manually
         map.addObserver(presenter);
         presenter.setWorldMap(map);
 

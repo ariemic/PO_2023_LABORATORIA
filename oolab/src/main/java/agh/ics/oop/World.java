@@ -11,7 +11,7 @@ import java.util.List;
 public class World {
 
     public static void main(String[] args) throws InterruptedException {
-//        Application.launch(SimulationApp.class, args);
+
         try {
             ConsoleMapDisplay observer = new ConsoleMapDisplay();
             String[] args1 = {"f", "r", "f", "l", "l", "l", "f", "f", "f", "b"};

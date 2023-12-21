@@ -24,6 +24,7 @@
         </VBox>
     </top>
     <center>
-        <GridPane fx:id="gridMap" gridLinesVisible="true" />
+        <Label fx:id="testMap" />
+<!--        <GridPane fx:id="gridMap" gridLinesVisible="true" />-->
     </center>
 </BorderPane>
