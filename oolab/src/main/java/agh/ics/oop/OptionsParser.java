@@ -1,12 +1,12 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.enums.MoveDirection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OptionsParser {
-    public static List<MoveDirection> parseDirections(String[] args) {
+    public static List<MoveDirection> parseDirections(String[] args) throws IllegalArgumentException {
         List<MoveDirection> directions = new ArrayList<MoveDirection>();
         for (String arg : args) {
             switch (arg) {
@@ -22,9 +22,10 @@ public class OptionsParser {
                 case "l" -> {
                     directions.add(MoveDirection.LEFT);
                 }
+                default -> throw new IllegalArgumentException(arg  + "is not legal move specification");
             }
         }
-        System.out.println(directions);
+//        System.out.println(directions);
         return directions;
     }
 }

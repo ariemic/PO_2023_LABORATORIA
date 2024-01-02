@@ -1,37 +1,59 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.interfaces.MapChangeListener;
+import agh.ics.oop.model.interfaces.WorldElement;
+import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-public abstract class AbstractWorldMap implements WorldMap{
+public abstract class AbstractWorldMap implements WorldMap {
     protected final Map<Vector2d, Animal> animals = new HashMap<>();
-    protected Vector2d worldTopRightCorner;
-    protected Vector2d worldDownLeftCorner;
     protected MapVisualizer map = new MapVisualizer(this);
+    protected final ArrayList<MapChangeListener> observers = new ArrayList<>();
 
-    public AbstractWorldMap(int width,int height){
-        worldTopRightCorner = new Vector2d(width,height);
-        worldDownLeftCorner = new Vector2d(0,0);
+    public void addObserver(MapChangeListener observer){
+        observers.add(observer);
     }
-    public AbstractWorldMap(){
-        this(4,4);
+
+    public void removeObserver(MapChangeListener observer){
+        observers.remove(observer);
     }
-    public void move(Animal animal, MoveDirection direction) {
+
+    private void showMessage(String message){
+        for(MapChangeListener observer: observers){
+            observer.mapChanged(this, message);
+        }
+    }
+
+
+    public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         if(objectAt(animal.getPosition()) == animal){
             this.animals.remove(animal.getPosition());
             animal.move(direction,this);
             this.place(animal);
         }
+
+        switch (direction){
+            case FORWARD -> showMessage("Animal %s moved forward".formatted(animal));
+            case BACKWARD -> showMessage("Animal %s moved backward".formatted(animal));
+            case RIGHT -> showMessage("Animal %s turned right".formatted(animal));
+            case LEFT -> showMessage("Animal %s turned left".formatted(animal));
+        }
     }
 
-    public boolean place(Animal animal) {
+    public void place(Animal animal) throws PositionAlreadyOccupiedException {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
-            return true;
+            showMessage("Animal moved into position: " + animal.getPosition());
         }
-        return false;
+        else{
+            throw new PositionAlreadyOccupiedException(animal.getPosition());
+
+        }
     }
     public boolean isOccupied(Vector2d position) {
         return animals.containsKey(position);
@@ -39,16 +61,21 @@ public abstract class AbstractWorldMap implements WorldMap{
     public WorldElement objectAt(Vector2d position) {
         return animals.get(position);
     }
-    @Override
-    public String toString() {
-        return map.draw(worldDownLeftCorner, worldTopRightCorner);
-    }
     public boolean canMoveTo(Vector2d position) {
         return !isOccupied(position);
     }
-
     public ArrayList<WorldElement> getElements() {
         return new ArrayList<>(animals.values());
     }
+
+    @Override
+    public abstract Boundry getCurrentBounds();
+
+    @Override
+    public String toString() {
+        Boundry bounds = getCurrentBounds();
+        return map.draw(bounds.leftDownCorner(), bounds.rightUpperCorner());
+    }
+
 }
 

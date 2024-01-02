@@ -1,6 +1,10 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.enums.MapDirection;
+import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.interfaces.WorldMap;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
@@ -9,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SimulationTest {
     @Test
-    public void runTest(){
+    public void runTest() throws PositionAlreadyOccupiedException {
         String[] args = {"r", "r", "f",  "f",  "f",  "b", "r" , "r",  "r",  "b",  "b" };
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
@@ -33,7 +37,7 @@ public class SimulationTest {
 //        assertEquals(testMap, map);
     }
     @Test
-    public void runTest2(){
+    public void runTest2() throws PositionAlreadyOccupiedException{
         String[] args = {"l", "l", "f", "b", "r", "b", "f", "b"};
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(4,4), new Vector2d(0,0));
@@ -56,7 +60,7 @@ public class SimulationTest {
 
     }
     @Test
-    public void runTest3(){
+    public void runTest3() throws PositionAlreadyOccupiedException{
         String[] args = {"l", "l", "f", "b", "r", "b", "f", "b"};
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(1,2), new Vector2d(0,4), new Vector2d(0, 0));
@@ -83,7 +87,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void runTest4(){
+    public void runTest4() throws PositionAlreadyOccupiedException{
         String[] args = {"b", "b", "b", "b", "r", "r", "b", "b", "b", "b"};
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(3,3));

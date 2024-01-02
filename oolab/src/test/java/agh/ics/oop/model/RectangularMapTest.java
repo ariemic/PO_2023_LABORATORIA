@@ -1,24 +1,31 @@
 package agh.ics.oop.model;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import agh.ics.oop.model.enums.MapDirection;
+import agh.ics.oop.model.enums.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 public class RectangularMapTest {
     @Test
-    public void TestPlace(){
+    public void TestPlace() throws PositionAlreadyOccupiedException {
         RectangularMap map = new RectangularMap(10,10);
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(5,8));
-        Animal animal3 = new Animal(new Vector2d(4,10));
+        Animal animal3 = new Animal(new Vector2d(2,2));
         Animal animal4 = new Animal(new Vector2d(5,8));
 
-        assertTrue(map.place(animal1));
-        assertTrue(map.place(animal2));
-//        assertFalse(map.place(animal3));
-        assertFalse(map.place(animal4));
+        map.place(animal1);
+        map.place(animal2);
+
+        Throwable exception1 = assertThrows(PositionAlreadyOccupiedException.class, () -> map.place(animal3));
+        Throwable exception2 = assertThrows(PositionAlreadyOccupiedException.class, () -> map.place(animal4));
+        assertEquals("Position (2,2) is already occupied",exception1.getMessage());
+        assertEquals("Position (5,8) is already occupied",exception2.getMessage());
     }
     @Test
-    public void TestMove(){
+    public void TestMove() throws PositionAlreadyOccupiedException{
         RectangularMap map = new RectangularMap(5,5);
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(3, 1));
@@ -30,7 +37,7 @@ public class RectangularMapTest {
         map.place(animal3);
         map.place(animal4);
 
-        map.move(animal1,MoveDirection.FORWARD);
+        map.move(animal1, MoveDirection.FORWARD);
         assertTrue(animal1.isAt(new Vector2d(2,3)));
         assertEquals(MapDirection.NORTH,animal1.getOrientation());
 
@@ -55,7 +62,7 @@ public class RectangularMapTest {
         assertTrue(animal2.isAt(new Vector2d(2,1)));
     }
     @Test
-    public void TestIsOccupied(){
+    public void TestIsOccupied() throws PositionAlreadyOccupiedException{
         Vector2d vec1 = new Vector2d(2,2);
         Vector2d vec2 = new Vector2d(3,1);
         Vector2d vec3 = new Vector2d(3,2);
@@ -78,7 +85,7 @@ public class RectangularMapTest {
         assertTrue(map.isOccupied(vec3));
     }
     @Test
-    public void TestObjectAt(){
+    public void TestObjectAt() throws PositionAlreadyOccupiedException{
         Vector2d vec1 = new Vector2d(2,2);
         Vector2d vec2 = new Vector2d(3,1);
         Vector2d vec3 = new Vector2d(3,2);
@@ -102,7 +109,7 @@ public class RectangularMapTest {
         assertNotEquals(map2.objectAt(vec1),animal1);
     }
     @Test
-    public void TestCanMoveTo(){
+    public void TestCanMoveTo() throws PositionAlreadyOccupiedException{
         RectangularMap map1 = new RectangularMap(5,5);
         RectangularMap map2 = new RectangularMap(2,8);
 

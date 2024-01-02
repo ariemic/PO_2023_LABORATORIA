@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.interfaces.WorldElement;
+
 import java.util.Objects;
 
 public class Grass implements WorldElement {
