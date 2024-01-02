@@ -53,15 +53,16 @@ public abstract class AbstractWorldMap implements WorldMap {
         switch (direction){
             case FORWARD -> {
                 if (oldPosition != animal.getPosition()){
-                mapChanged("Animal %s moved forward".formatted(animal.getPosition()));
+                    //TODO
+                mapChanged("Animal moved forward from %s to %s".formatted(oldPosition, animal.getPosition()));
             }}
             case BACKWARD -> {
                 if (oldPosition != animal.getPosition()){
-                    mapChanged("Animal %s moved backward".formatted(animal.getPosition()));
+                    mapChanged("Animal moved backward from %s to %s".formatted(oldPosition, animal.getPosition()));
                 }
             }
-            case RIGHT -> mapChanged("Animal %s turned right".formatted(animal.getPosition()));
-            case LEFT -> mapChanged("Animal %s turned left".formatted(animal.getPosition()));
+            case RIGHT -> mapChanged("Animal from position %s turned right to %s".formatted(oldPosition, animal.getPosition()));
+            case LEFT -> mapChanged("Animal from position %s turned left to %s".formatted(oldPosition ,animal.getPosition()));
         }
     }
 
