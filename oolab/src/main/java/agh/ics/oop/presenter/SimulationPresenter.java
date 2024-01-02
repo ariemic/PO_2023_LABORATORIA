@@ -44,10 +44,10 @@ public class SimulationPresenter implements MapChangeListener{
 
     private void putElements(int height, Boundry bounds) {
         for(WorldElement element: map.getElements()){
-            int newY = element.getPosition().getX() - bounds.leftDownCorner().getX() + 1;
-            int newX = height - ( element.getPosition().getY() - bounds.leftDownCorner().getY()); //because I input values inot column from biggest to smallest
+            int newX = element.getPosition().getX() - bounds.leftDownCorner().getX() + 1;
+            int newY = height - ( element.getPosition().getY() - bounds.leftDownCorner().getY()); //because I input values inot column from biggest to smallest
             Label elem = new Label(element.toString());
-            gridMap.add(elem, newY, newX);
+            gridMap.add(elem, newX, newY);
             GridPane.setHalignment(elem, HPos.CENTER);
         }
     }
@@ -59,28 +59,23 @@ public class SimulationPresenter implements MapChangeListener{
     }
 
     private void createGrid(int width, int height, Boundry bounds) {
-        gridMap.getColumnConstraints().add(new ColumnConstraints(30));
-        gridMap.getRowConstraints().add(new RowConstraints(30));
         Label separator = new Label("y\\x");
         gridMap.add(separator, 0, 0);
         GridPane.setHalignment(separator, HPos.CENTER);
+        gridMap.getColumnConstraints().add(new ColumnConstraints(30));
+        gridMap.getRowConstraints().add(new RowConstraints(30));
 
-        //problem z tworzeniem cyfr
-        for(int i=1; i <= width; i++){
+        for(int i=0; i < width; i++){
             gridMap.getColumnConstraints().add(new ColumnConstraints(30));
-//            Label digit = new Label(String.valueOf(i));
             Label digit = new Label(String.valueOf(i+bounds.leftDownCorner().getX()));
-            gridMap.add(digit, i, 0); //row
+            gridMap.add(digit, i+1, 0); //row
             GridPane.setHalignment(digit, HPos.CENTER);
         }
-//        int j = height;
-        for(int i=1; i <= height; i++){
+        for(int i=0; i < height; i++){
             gridMap.getRowConstraints().add(new RowConstraints(30));
-//            Label digit = new Label(String.valueOf(j));
-            Label digit = new Label(String.valueOf(height+bounds.leftDownCorner().getY()-i));
-            gridMap.add(digit, 0, i);
+            Label digit = new Label(String.valueOf(height+bounds.leftDownCorner().getY()-i-1));
+            gridMap.add(digit, 0, i+1);
             GridPane.setHalignment(digit, HPos.CENTER);
-//            j--;
         }
 
 
@@ -89,7 +84,10 @@ public class SimulationPresenter implements MapChangeListener{
 
     @Override
     public void mapChanged(WorldMap worldMap, String message){
-        Platform.runLater(this::drawMap);
+        Platform.runLater(() ->{
+            this.drawMap();
+            this.animalMoves.setText(message);
+        });
 
     }
 

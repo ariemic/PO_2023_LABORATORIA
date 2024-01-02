@@ -23,7 +23,6 @@ public class SimulationApp extends Application {
         BorderPane viewRoot = loader.load();
 
         SimulationPresenter presenter = loader.getController();
-//        presenter.onSimulationStartClicked(); runs as you click start button, no need to run it manually
         map.addObserver(presenter);
         presenter.setWorldMap(map);
 
