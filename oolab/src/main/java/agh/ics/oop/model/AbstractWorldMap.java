@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.MapChangeListener;
@@ -43,6 +44,7 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         Vector2d oldPosition = animal.getPosition();
+        String oldDirection = animal.toString();
 
         if(objectAt(animal.getPosition()) == animal){
             this.animals.remove(animal.getPosition());
@@ -60,8 +62,8 @@ public abstract class AbstractWorldMap implements WorldMap {
                     mapChanged("Animal moved backward from %s to %s".formatted(oldPosition, animal.getPosition()));
                 }
             }
-            case RIGHT -> mapChanged("Animal from position %s turned right to %s".formatted(oldPosition, animal.getPosition()));
-            case LEFT -> mapChanged("Animal from position %s turned left to %s".formatted(oldPosition ,animal.getPosition()));
+            case RIGHT -> mapChanged("Animal from position %s turned right, orientation changed from %s to %s".formatted(oldPosition, oldDirection, animal.toString()));
+            case LEFT -> mapChanged("Animal from position %s turned left, orientation changed from %s to %s".formatted(oldPosition, oldDirection, animal.toString()));
         }
     }
 
