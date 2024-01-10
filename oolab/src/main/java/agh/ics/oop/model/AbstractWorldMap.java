@@ -11,10 +11,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 public abstract class AbstractWorldMap implements WorldMap {
-    protected final Map<Vector2d, Animal> animals = new HashMap<>();
-    protected MapVisualizer map = new MapVisualizer(this);
-    protected final ArrayList<MapChangeListener> observers = new ArrayList<>();
+    protected final int mapID;
+    protected final Map<Vector2d, Animal> animals;
+    protected MapVisualizer map;
+    protected final ArrayList<MapChangeListener> observers;
 
+    public AbstractWorldMap(int mapID){
+        this.mapID = mapID;
+        this.map = new MapVisualizer(this);
+        this.animals = new HashMap<>();
+        this.observers = new ArrayList<>();
+    }
+    @Override
+    public int getId(){
+        return mapID;
+    }
     public void addObserver(MapChangeListener observer){
         observers.add(observer);
     }
@@ -31,6 +42,8 @@ public abstract class AbstractWorldMap implements WorldMap {
 
 
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
+        Vector2d oldPosition = animal.getPosition();
+
         if(objectAt(animal.getPosition()) == animal){
             this.animals.remove(animal.getPosition());
             animal.move(direction,this);
@@ -38,10 +51,17 @@ public abstract class AbstractWorldMap implements WorldMap {
         }
 
         switch (direction){
-            case FORWARD -> showMessage("Animal %s moved forward".formatted(animal));
-            case BACKWARD -> showMessage("Animal %s moved backward".formatted(animal));
-            case RIGHT -> showMessage("Animal %s turned right".formatted(animal));
-            case LEFT -> showMessage("Animal %s turned left".formatted(animal));
+            case FORWARD -> {
+                if (oldPosition != animal.getPosition()){
+                showMessage("Animal %s moved forward".formatted(animal.getPosition()));
+            }}
+            case BACKWARD -> {
+                if (oldPosition != animal.getPosition()){
+                    showMessage("Animal %s moved backward".formatted(animal.getPosition()));
+                }
+            }
+            case RIGHT -> showMessage("Animal %s turned right".formatted(animal.getPosition()));
+            case LEFT -> showMessage("Animal %s turned left".formatted(animal.getPosition()));
         }
     }
 
