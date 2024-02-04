@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AnimalTest {
     @Test
     public void testOrientation(){
-        WorldMap map = new RectangularMap(4,4);
+        WorldMap map = new RectangularMap(4,4, 1);
         Animal animal = new Animal(new Vector2d(2,2));
         assertSame(animal.getOrientation(), MapDirection.NORTH);
         assertNotSame(animal.getOrientation(), MapDirection.EAST);
@@ -55,7 +55,7 @@ public class AnimalTest {
 
         @Test
         public void testAnimalMovement() {
-            WorldMap map = new RectangularMap(4, 4);
+            WorldMap map = new RectangularMap(4, 4, 2);
             Animal tiger = new Animal(new Vector2d(2,2));
             tiger.move(MoveDirection.FORWARD, map);
             assertTrue(tiger.isAt(new Vector2d(2, 3)));
@@ -88,7 +88,7 @@ public class AnimalTest {
 
         @Test
         public void testAnimalBoundary() {
-            WorldMap map = new RectangularMap(4, 4);
+            WorldMap map = new RectangularMap(4, 4, 3);
             Animal animal = new Animal(new Vector2d(0, 0));
             animal.move(MoveDirection.BACKWARD, map);
             assertEquals(new Vector2d(0, 0), animal.getPosition());
