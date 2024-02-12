@@ -1,6 +1,5 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.MapChangeListener;
@@ -8,9 +7,8 @@ import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 public abstract class AbstractWorldMap implements WorldMap {
     protected final int mapID;
     protected final Map<Vector2d, Animal> animals;
@@ -27,6 +25,15 @@ public abstract class AbstractWorldMap implements WorldMap {
     public int getId(){
         return mapID;
     }
+    @Override
+    public List<Animal> getOrderedAnimals(){
+        List<Animal> orderedAnimals = (List<Animal>) animals.values();
+        Collections.sort(orderedAnimals, Comparator
+                .comparing((Animal animal) -> animal.getPosition().getX()) //musimy operować na jednym obiekcie klasy animal nie na całej klasie
+                .thenComparing((Animal animal) -> animal.getPosition().getY()));
+        return orderedAnimals;
+    }
+
     public void addObserver(MapChangeListener observer){
         observers.add(observer);
     }

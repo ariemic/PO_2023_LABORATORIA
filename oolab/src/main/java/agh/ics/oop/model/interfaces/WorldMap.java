@@ -7,6 +7,8 @@ import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -50,4 +52,5 @@ public interface WorldMap extends MoveValidator {
     Boundry getCurrentBounds();
 
     int getId();
+    List<Animal> getOrderedAnimals();
 }

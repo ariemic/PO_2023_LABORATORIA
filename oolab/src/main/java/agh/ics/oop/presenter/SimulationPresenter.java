@@ -79,7 +79,6 @@ public class SimulationPresenter implements MapChangeListener{
         }
 
 
-
     }
 
     @Override
@@ -90,6 +89,8 @@ public class SimulationPresenter implements MapChangeListener{
         });
 
     }
+
+
 
     public void onSimulationStartClicked() throws IllegalArgumentException{
         List<MoveDirection> moves = OptionsParser.parseDirections(getParameters.getText().split(" "));
