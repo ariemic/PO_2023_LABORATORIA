@@ -5,6 +5,8 @@ import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.util.PositionsGenerator;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.Math.sqrt;
 
@@ -70,8 +72,8 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public ArrayList<WorldElement> getElements() {
-        ArrayList<WorldElement> values = new ArrayList<>(super.getElements());
-        values.addAll(grassFields.values());
-        return values;
+        return Stream.concat(super.getElements().stream(), grassFields.values().stream())
+                .collect(Collectors.toCollection(ArrayList::new));
+
     }
 }
