@@ -27,7 +27,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
     @Override
     public List<Animal> getOrderedAnimals(){
-        List<Animal> orderedAnimals = (List<Animal>) animals.values();
+        List<Animal> orderedAnimals = new ArrayList<>(animals.values());
         Collections.sort(orderedAnimals, Comparator
                 .comparing((Animal animal) -> animal.getPosition().getX()) //musimy operować na jednym obiekcie klasy animal nie na całej klasie
                 .thenComparing((Animal animal) -> animal.getPosition().getY()));

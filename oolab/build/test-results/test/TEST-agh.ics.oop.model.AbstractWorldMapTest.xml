@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agh.ics.oop.model.AbstractWorldMapTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-02-12T12:52:51" hostname="ARIEL_PC" time="0.029">
+  <properties/>
+  <testcase name="testOrderedAnimals()" classname="agh.ics.oop.model.AbstractWorldMapTest" time="0.029"/>
+  <system-out><![CDATA[(0,8)
+(1,2)
+(1,3)
+(2,0)
+(2,4)
+(3,1)
+(5,3)
+(5,4)
+(7,6)
+(8,0)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
