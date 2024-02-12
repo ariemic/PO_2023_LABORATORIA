@@ -7,13 +7,32 @@ import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 public abstract class AbstractWorldMap implements WorldMap {
-    protected final Map<Vector2d, Animal> animals = new HashMap<>();
-    protected MapVisualizer map = new MapVisualizer(this);
-    protected final ArrayList<MapChangeListener> observers = new ArrayList<>();
+    protected final int mapID;
+    protected final Map<Vector2d, Animal> animals;
+    protected MapVisualizer map;
+    protected final ArrayList<MapChangeListener> observers;
+
+    public AbstractWorldMap(int mapID){
+        this.mapID = mapID;
+        this.map = new MapVisualizer(this);
+        this.animals = new HashMap<>();
+        this.observers = new ArrayList<>();
+    }
+    @Override
+    public int getId(){
+        return mapID;
+    }
+    @Override
+    public List<Animal> getOrderedAnimals(){
+        List<Animal> orderedAnimals = new ArrayList<>(animals.values());
+        Collections.sort(orderedAnimals, Comparator
+                .comparing((Animal animal) -> animal.getPosition().getX()) //musimy operować na jednym obiekcie klasy animal nie na całej klasie
+                .thenComparing((Animal animal) -> animal.getPosition().getY()));
+        return orderedAnimals;
+    }
 
     public void addObserver(MapChangeListener observer){
         observers.add(observer);
@@ -23,7 +42,7 @@ public abstract class AbstractWorldMap implements WorldMap {
         observers.remove(observer);
     }
 
-    private void showMessage(String message){
+    private void mapChanged(String message){
         for(MapChangeListener observer: observers){
             observer.mapChanged(this, message);
         }
@@ -31,6 +50,9 @@ public abstract class AbstractWorldMap implements WorldMap {
 
 
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
+        Vector2d oldPosition = animal.getPosition();
+        String oldDirection = animal.toString();
+
         if(objectAt(animal.getPosition()) == animal){
             this.animals.remove(animal.getPosition());
             animal.move(direction,this);
@@ -38,17 +60,24 @@ public abstract class AbstractWorldMap implements WorldMap {
         }
 
         switch (direction){
-            case FORWARD -> showMessage("Animal %s moved forward".formatted(animal));
-            case BACKWARD -> showMessage("Animal %s moved backward".formatted(animal));
-            case RIGHT -> showMessage("Animal %s turned right".formatted(animal));
-            case LEFT -> showMessage("Animal %s turned left".formatted(animal));
+            case FORWARD -> {
+                if (oldPosition != animal.getPosition()){
+                mapChanged("Animal moved forward from %s to %s".formatted(oldPosition, animal.getPosition()));
+            }}
+            case BACKWARD -> {
+                if (oldPosition != animal.getPosition()){
+                    mapChanged("Animal moved backward from %s to %s".formatted(oldPosition, animal.getPosition()));
+                }
+            }
+            case RIGHT -> mapChanged("Animal from position %s turned right, orientation changed from %s to %s".formatted(oldPosition, oldDirection, animal.toString()));
+            case LEFT -> mapChanged("Animal from position %s turned left, orientation changed from %s to %s".formatted(oldPosition, oldDirection, animal.toString()));
         }
     }
 
     public void place(Animal animal) throws PositionAlreadyOccupiedException {
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
-            showMessage("Animal moved into position: " + animal.getPosition());
+            mapChanged("Animal moved into position: " + animal.getPosition());
         }
         else{
             throw new PositionAlreadyOccupiedException(animal.getPosition());

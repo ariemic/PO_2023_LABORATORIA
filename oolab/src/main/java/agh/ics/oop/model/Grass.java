@@ -25,17 +25,17 @@ public class Grass implements WorldElement {
         return this.position.equals(position);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Grass) obj;
-        return Objects.equals(this.position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == this) return true;
+//        if (obj == null || obj.getClass() != this.getClass()) return false;
+//        var that = (Grass) obj;
+//        return Objects.equals(this.position, that.position);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(position);
+//    }
 
 }

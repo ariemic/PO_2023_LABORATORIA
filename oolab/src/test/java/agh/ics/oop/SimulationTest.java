@@ -1,10 +1,12 @@
 package agh.ics.oop;
 
+import agh.ics.oop.Simulation;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldMap;
+import agh.ics.oop.model.util.OptionsParser;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
@@ -17,12 +19,12 @@ public class SimulationTest {
         String[] args = {"r", "r", "f",  "f",  "f",  "b", "r" , "r",  "r",  "b",  "b" };
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-        WorldMap map = new RectangularMap(4, 4);
+        WorldMap map = new RectangularMap(4, 4, 1);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        WorldMap testMap = new RectangularMap(4,4);
+        WorldMap testMap = new RectangularMap(4,4, 2);
         Animal animal1 = new Animal(new Vector2d(3, 4), MapDirection.SOUTH);
         Animal animal2 = new Animal(new Vector2d(4, 2), MapDirection.WEST);
 
@@ -41,13 +43,13 @@ public class SimulationTest {
         String[] args = {"l", "l", "f", "b", "r", "b", "f", "b"};
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(4,4), new Vector2d(0,0));
-        WorldMap map = new RectangularMap(4, 4);
+        WorldMap map = new RectangularMap(4, 4, 1);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
 
-        WorldMap testMap = new RectangularMap(4,4);
+        WorldMap testMap = new RectangularMap(4,4, 2);
         Animal animal1 = new Animal(new Vector2d(3, 4), MapDirection.NORTH);
         Animal animal2 = new Animal(new Vector2d(3, 0), MapDirection.WEST);
         testMap.place(animal1);
@@ -64,12 +66,12 @@ public class SimulationTest {
         String[] args = {"l", "l", "f", "b", "r", "b", "f", "b"};
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(1,2), new Vector2d(0,4), new Vector2d(0, 0));
-        WorldMap map = new RectangularMap(4, 4);
+        WorldMap map = new RectangularMap(4, 4, 1);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        WorldMap testMap = new RectangularMap(4,4);
+        WorldMap testMap = new RectangularMap(4,4, 2);
         Animal animal1 = new Animal(new Vector2d(0, 3), MapDirection.NORTH);
         Animal animal2 = new Animal(new Vector2d(1, 2), MapDirection.WEST);
         Animal animal3 = new Animal(new Vector2d(0, 0), MapDirection.NORTH);
@@ -91,11 +93,11 @@ public class SimulationTest {
         String[] args = {"b", "b", "b", "b", "r", "r", "b", "b", "b", "b"};
         List<MoveDirection> moveDirections = OptionsParser.parseDirections(args);
         List<Vector2d> positions = List.of(new Vector2d(3,3));
-        WorldMap map = new RectangularMap(3, 3);
+        WorldMap map = new RectangularMap(3, 3, 1);
         Simulation simulation = new Simulation(positions, moveDirections, map);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
-        WorldMap testMap = new RectangularMap(3,3);
+        WorldMap testMap = new RectangularMap(3,3, 1);
         Animal animal1 = new Animal(new Vector2d(3, 3), MapDirection.SOUTH);
         testMap.place(animal1);
 

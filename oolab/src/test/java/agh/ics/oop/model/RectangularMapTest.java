@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class RectangularMapTest {
     @Test
     public void TestPlace() throws PositionAlreadyOccupiedException {
-        RectangularMap map = new RectangularMap(10,10);
+        RectangularMap map = new RectangularMap(10,10, 1);
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(5,8));
         Animal animal3 = new Animal(new Vector2d(2,2));
@@ -26,7 +26,7 @@ public class RectangularMapTest {
     }
     @Test
     public void TestMove() throws PositionAlreadyOccupiedException{
-        RectangularMap map = new RectangularMap(5,5);
+        RectangularMap map = new RectangularMap(5,5, 2);
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(3, 1));
         Animal animal3 = new Animal(new Vector2d(4,3));
@@ -67,7 +67,7 @@ public class RectangularMapTest {
         Vector2d vec2 = new Vector2d(3,1);
         Vector2d vec3 = new Vector2d(3,2);
 
-        RectangularMap map = new RectangularMap(5,5);
+        RectangularMap map = new RectangularMap(5,5, 3);
         Animal animal1 = new Animal(vec1);
         Animal animal2 = new Animal(vec2);
         map.place(animal1);
@@ -90,8 +90,8 @@ public class RectangularMapTest {
         Vector2d vec2 = new Vector2d(3,1);
         Vector2d vec3 = new Vector2d(3,2);
 
-        RectangularMap map = new RectangularMap(5,5);
-        RectangularMap map2 = new RectangularMap(5,5);
+        RectangularMap map = new RectangularMap(5,5, 1);
+        RectangularMap map2 = new RectangularMap(5,5, 2);
         Animal animal1 = new Animal(vec1);
         Animal animal2 = new Animal(vec2);
         Animal animal3 = new Animal(vec1);
@@ -110,8 +110,8 @@ public class RectangularMapTest {
     }
     @Test
     public void TestCanMoveTo() throws PositionAlreadyOccupiedException{
-        RectangularMap map1 = new RectangularMap(5,5);
-        RectangularMap map2 = new RectangularMap(2,8);
+        RectangularMap map1 = new RectangularMap(5,5, 1);
+        RectangularMap map2 = new RectangularMap(2,8, 2);
 
         Vector2d vec1 = new Vector2d(2,2);
         Vector2d vec2 = new Vector2d(3,1);

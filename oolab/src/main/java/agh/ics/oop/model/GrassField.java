@@ -2,9 +2,11 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldElement;
+import agh.ics.oop.model.util.PositionsGenerator;
 
-import java.security.AuthProvider;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.Math.sqrt;
 
@@ -14,11 +16,12 @@ public class GrassField extends AbstractWorldMap{
     private Boundry worldBounds;
     private final Boundry grassBounds;
 
-    public GrassField(int grassNumber){
-        this(grassNumber,new Random());
+    public GrassField(int grassNumber, int mapID){
+        this(grassNumber,new Random(), mapID);
     }
 
-    public GrassField(int grassNumber,Random seed){
+    public GrassField(int grassNumber,Random seed, int mapID){
+        super(mapID);
         Vector2d worldTopRightCorner = new Vector2d(0, 0);
         Vector2d worldDownLeftCorner = new Vector2d((int)(sqrt(grassNumber * 10)),(int) (sqrt(grassNumber * 10)));
 
@@ -35,13 +38,13 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public void place(Animal animal) throws PositionAlreadyOccupiedException {
         super.place(animal);
-        updateCorners();
+
     }
 
     @Override
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         super.move(animal, direction);
-        updateCorners();
+
     }
 
     public void updateCorners(){
@@ -63,13 +66,14 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public Boundry getCurrentBounds() {
+        updateCorners();
         return worldBounds;
     }
 
     @Override
     public ArrayList<WorldElement> getElements() {
-        ArrayList<WorldElement> values = new ArrayList<>(super.getElements());
-        values.addAll(grassFields.values());
-        return values;
+        return Stream.concat(super.getElements().stream(), grassFields.values().stream())
+                .collect(Collectors.toCollection(ArrayList::new));
+
     }
 }
