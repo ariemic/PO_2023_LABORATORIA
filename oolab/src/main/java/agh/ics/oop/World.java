@@ -2,11 +2,10 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.util.ConsoleMapDisplay;
+
 import agh.ics.oop.model.util.FileMapDisplay;
 import agh.ics.oop.model.util.OptionsParser;
 
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class World {
     public static void main(String[] args) throws InterruptedException {
 
         try {
-//            FileMapDisplay observer = new FileMapDisplay();
-            ConsoleMapDisplay observer = new ConsoleMapDisplay();
+//            ConsoleMapDisplay observer = new ConsoleMapDisplay();
+            FileMapDisplay observer = new FileMapDisplay();
             String[] args1 = {"f", "r", "f", "l", "l", "l", "f", "f", "f", "b"};
             ArrayList<Vector2d> positions1 = new ArrayList<>(List.of(new Vector2d(7, 8), new Vector2d(3, 4),new Vector2d(2,8)));
             GrassField map1 = new GrassField(7,1);

@@ -1,0 +1,23 @@
+Animal moved into position: (7,8)
+Animal moved into position: (3,4)
+Animal moved into position: (2,8)
+Animal moved into position: (7,9)
+Animal moved forward from (7,8) to (7,9)
+Animal moved into position: (3,4)
+Animal from position (3,4) turned right, orientation changed from N to E
+Animal moved into position: (2,9)
+Animal moved forward from (2,8) to (2,9)
+Animal moved into position: (7,9)
+Animal from position (7,9) turned left, orientation changed from N to W
+Animal moved into position: (3,4)
+Animal from position (3,4) turned left, orientation changed from E to N
+Animal moved into position: (2,9)
+Animal from position (2,9) turned left, orientation changed from N to W
+Animal moved into position: (6,9)
+Animal moved forward from (7,9) to (6,9)
+Animal moved into position: (3,5)
+Animal moved forward from (3,4) to (3,5)
+Animal moved into position: (1,9)
+Animal moved forward from (2,9) to (1,9)
+Animal moved into position: (7,9)
+Animal moved backward from (6,9) to (7,9)
