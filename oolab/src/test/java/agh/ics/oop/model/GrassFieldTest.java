@@ -7,6 +7,7 @@ import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 public class GrassFieldTest {
     @Test
-    public void TestPlace() throws PositionAlreadyOccupiedException {
+    public void TestPlace() throws PositionAlreadyOccupiedException{
         GrassField map = new GrassField(5, 1);
 
         Vector2d v1 = new Vector2d(2,2);
@@ -33,7 +34,7 @@ public class GrassFieldTest {
     }
 
     @Test
-    public void TestMove() throws PositionAlreadyOccupiedException{
+    public void TestMove() throws PositionAlreadyOccupiedException {
         GrassField map = new GrassField(2,new Random(150), 1);
         Animal animal1 = new Animal();
         Animal animal2 = new Animal(new Vector2d(3, 1));

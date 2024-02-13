@@ -5,9 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class RectangularMapTest {
+import java.io.IOException;
+
+public class RectangularMapTest{
+
     @Test
     public void TestPlace() throws PositionAlreadyOccupiedException {
         RectangularMap map = new RectangularMap(10,10, 1);

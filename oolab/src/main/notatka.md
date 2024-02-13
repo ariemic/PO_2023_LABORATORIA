@@ -29,6 +29,10 @@ Comparable. Powodem jest bezpośredni brak funkcjie getX, getY w klasie Aniamal.
                 .thenComparing((Animal animal) -> animal.getPosition().getY()));
 
 ## Mockowanie
-Testując jakąś metode nie możemy jej mockować, nie ma wtedy sensu testowanie tej metody bo ty tak naprawde piszesz w 
+Testując jakąś metode nie możemy jej mockować.
+Nie ma wtedy sensu testowanie takiej metody bo ty tak naprawde piszesz w 
 mocku co ona ma zwrócić! Możesz mockować metody których działanie już wcześniej sprawdziłeś ale nie takie dla których
-teraz pieszez testy!
+teraz pieszesz testy!
+
+Ba nawet tej klasy która posiada tą metodę nie możesz zmokować!
+Musisz stworzyć normalny obiekt. Klasy pośrednie potrzebne ale nie z metodą którą testujesz mogą być zmokowane

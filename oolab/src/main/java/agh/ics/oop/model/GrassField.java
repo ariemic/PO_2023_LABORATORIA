@@ -4,6 +4,7 @@ import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.util.PositionsGenerator;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -46,7 +47,7 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
+    public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException{
         super.move(animal, direction);
 
     }

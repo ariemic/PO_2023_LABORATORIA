@@ -7,6 +7,7 @@ import agh.ics.oop.model.interfaces.WorldElement;
 import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -102,6 +103,11 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     @Override
     public abstract Boundry getCurrentBounds();
+
+    @Override
+    public int getId(){
+        return mapID;
+    }
 
     @Override
     public String toString() {
