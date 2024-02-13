@@ -12,9 +12,13 @@ import static java.lang.Math.sqrt;
 
 public class GrassField extends AbstractWorldMap{
 
-    private final Map<Vector2d, Grass> grassFields = new HashMap<>();
+    Map<Vector2d, Grass> grassFields = new HashMap<>();
     private Boundry worldBounds;
     private final Boundry grassBounds;
+
+    public GrassField(){
+        this(0, new Random(), 1);
+    }
 
     public GrassField(int grassNumber, int mapID){
         this(grassNumber,new Random(), mapID);
@@ -57,11 +61,10 @@ public class GrassField extends AbstractWorldMap{
         worldBounds = new Boundry(worldDownLeftCorner, worldTopRightCorner);
     }
     @Override
-    public WorldElement objectAt(Vector2d position) {
-        if (super.objectAt(position) == null){
-            return grassFields.get(position);
-        }
-        return super.objectAt(position);
+    public Optional<WorldElement> objectAt(Vector2d position) {
+        //returns animal if is Present on position otherwise grass field if both are absent return null
+        return Optional.ofNullable(super.objectAt(position).orElse(grassFields.get(position)));
+
     }
 
     @Override

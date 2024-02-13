@@ -8,10 +8,11 @@ import agh.ics.oop.model.interfaces.WorldMap;
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class AbstractWorldMap implements WorldMap {
     protected final int mapID;
-    protected final Map<Vector2d, Animal> animals;
+    protected  Map<Vector2d, Animal> animals;
     protected MapVisualizer map;
     protected final ArrayList<MapChangeListener> observers;
 
@@ -20,19 +21,24 @@ public abstract class AbstractWorldMap implements WorldMap {
         this.map = new MapVisualizer(this);
         this.animals = new HashMap<>();
         this.observers = new ArrayList<>();
+
     }
     @Override
     public int getId(){
         return mapID;
     }
+
     @Override
     public List<Animal> getOrderedAnimals(){
-        List<Animal> orderedAnimals = new ArrayList<>(animals.values());
-        Collections.sort(orderedAnimals, Comparator
-                .comparing((Animal animal) -> animal.getPosition().getX()) //musimy operować na jednym obiekcie klasy animal nie na całej klasie
-                .thenComparing((Animal animal) -> animal.getPosition().getY()));
-        return orderedAnimals;
+        return animals.values().stream()
+                .sorted(Comparator
+                        .comparing(Animal::getPosition)
+                        .thenComparing(animal -> animal.getPosition().getX())
+                        .thenComparing(animal -> animal.getPosition().getY()))
+                .collect(Collectors.toList());
+
     }
+
 
     public void addObserver(MapChangeListener observer){
         observers.add(observer);
@@ -52,8 +58,8 @@ public abstract class AbstractWorldMap implements WorldMap {
     public void move(Animal animal, MoveDirection direction) throws PositionAlreadyOccupiedException {
         Vector2d oldPosition = animal.getPosition();
         String oldDirection = animal.toString();
-
-        if(objectAt(animal.getPosition()) == animal){
+        Optional<WorldElement> element = objectAt(animal.getPosition());
+        if(element.isPresent() && element.get() == animal){
             this.animals.remove(animal.getPosition());
             animal.move(direction,this);
             this.place(animal);
@@ -87,8 +93,8 @@ public abstract class AbstractWorldMap implements WorldMap {
     public boolean isOccupied(Vector2d position) {
         return animals.containsKey(position);
     }
-    public WorldElement objectAt(Vector2d position) {
-        return animals.get(position);
+    public Optional<WorldElement> objectAt(Vector2d position) {
+        return Optional.ofNullable(animals.get(position));
     }
     public boolean canMoveTo(Vector2d position) {
         return !isOccupied(position);

@@ -3,13 +3,18 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+import agh.ics.oop.model.interfaces.WorldElement;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.text.html.Option;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-
+import static org.mockito.Mockito.*;
 public class GrassFieldTest {
     @Test
     public void TestPlace() throws PositionAlreadyOccupiedException {
@@ -100,36 +105,53 @@ public class GrassFieldTest {
         assertFalse(map.isOccupied(vec2));
         assertTrue(map.isOccupied(vec3));
     }
+
+
     @Test
     public void TestObjectAt() throws PositionAlreadyOccupiedException{
-        Vector2d vec1 = new Vector2d(2,2);
-        Vector2d vec2 = new Vector2d(3,1);
-        Vector2d vec3 = new Vector2d(3,2);
+        Vector2d animalPosition = new Vector2d(2,2);
+        Vector2d grassPosition = new Vector2d(3, 3);
+        Vector2d emptyPosition = new Vector2d(0, 0);
 
-        GrassField map = new GrassField(3,new Random(100), 1);
-        GrassField map2 = new GrassField(3,new Random(200), 1);
+        Map<Vector2d, Animal> animals = new HashMap<>();
+        Map<Vector2d, Grass> grasses = new HashMap<>();
 
-        assertTrue(map.objectAt(vec1) instanceof Grass);
-        assertTrue(map.objectAt(new Vector2d(2,0)) instanceof Grass);
-        assertTrue(map.objectAt(new Vector2d(0,1)) instanceof Grass);
-        assertNull(map.objectAt(new Vector2d(0, 0)));
 
-        Animal animal1 = new Animal(vec1);
-        Animal animal2 = new Animal(vec2);
-        Animal animal3 = new Animal(vec1);
-        map.place(animal1);
-        map.place(animal2);
-        map2.place(animal3);
+        Animal animal = mock(Animal.class);
+        animals.put(animalPosition, animal);
 
-        assertEquals(map.objectAt(vec1),animal1);
-        assertEquals(map.objectAt(vec2),animal2);
-        assertNotEquals(map.objectAt(vec1),animal2);
-        assertNotEquals(map.objectAt(vec2),animal1);
-        assertNotEquals(map.objectAt(vec3),animal1);
+        Grass grass = mock(Grass.class);
+        grasses.put(grassPosition, grass);
 
-        assertEquals(map2.objectAt(vec1),animal3);
-        assertNotEquals(map2.objectAt(vec1),animal1);
+        GrassField grassField = new GrassField();
+        grassField.grassFields = grasses;
+        grassField.animals = animals;
+
+
+        assertTrue(grassField.objectAt(animalPosition).isPresent());
+        assertTrue(grassField.objectAt(grassPosition).isPresent());
+        assertFalse(grassField.objectAt(emptyPosition).isPresent());
+
+        //just one world element on position
+        assertEquals(Optional.of(grass), grassField.objectAt(grassPosition));
+        assertEquals(Optional.of(animal), grassField.objectAt(animalPosition));
+
+        //empty position
+        assertEquals(Optional.empty(), grassField.objectAt(emptyPosition));
+
+
+        //grass and animal on the same position
+        Vector2d repeatedPosition = new Vector2d(1, 1);
+        animals.put(repeatedPosition, animal);
+        grasses.put(repeatedPosition, grass);
+        assertEquals(Optional.of(animal), grassField.objectAt(repeatedPosition));
+
     }
+
+
+
+
+
     @Test
     public void TestCanMoveTo() throws PositionAlreadyOccupiedException{
         GrassField map1 = new GrassField(5,new Random(100), 1);

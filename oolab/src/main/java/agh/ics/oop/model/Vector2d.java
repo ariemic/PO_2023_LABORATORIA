@@ -5,7 +5,7 @@ import java.util.Objects;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-public class Vector2d {
+public class Vector2d implements Comparable<Vector2d> {
     private final int x;
     private final int y;
 
@@ -62,5 +62,13 @@ public class Vector2d {
         return Objects.hash(x, y);
     }
 
+    @Override
+    public int compareTo(Vector2d other) {
+       int result = Integer.compare(this.x, other.x);
+       if (result == 0){
+           return Integer.compare(this.y, other.y);
+       }
+       return result;
+    }
 }
 

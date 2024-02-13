@@ -7,7 +7,7 @@ import agh.ics.oop.model.interfaces.WorldElement;
 
 import java.util.Objects;
 
-public class Animal implements WorldElement {
+public class Animal implements WorldElement, Comparable<Animal> {
     private MapDirection orientation;
     private Vector2d position;
 
@@ -83,4 +83,8 @@ public class Animal implements WorldElement {
         return this.orientation;
     }
 
+    @Override
+    public int compareTo(Animal o) {
+        return this.getPosition().compareTo(o.getPosition());
+    }
 }
