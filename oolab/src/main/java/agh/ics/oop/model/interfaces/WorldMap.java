@@ -7,7 +7,7 @@ import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +52,6 @@ public interface WorldMap extends MoveValidator {
     ArrayList<WorldElement> getElements();
     Boundry getCurrentBounds();
 
-    int getId();
+
     List<Animal> getOrderedAnimals();
 }

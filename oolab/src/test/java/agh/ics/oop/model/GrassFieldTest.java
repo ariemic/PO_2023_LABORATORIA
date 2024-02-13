@@ -3,10 +3,10 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.enums.MapDirection;
 import agh.ics.oop.model.enums.MoveDirection;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
-import agh.ics.oop.model.interfaces.WorldElement;
+
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.html.Option;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -108,7 +108,7 @@ public class GrassFieldTest {
 
 
     @Test
-    public void TestObjectAt() throws PositionAlreadyOccupiedException{
+    public void TestObjectAt(){
         Vector2d animalPosition = new Vector2d(2,2);
         Vector2d grassPosition = new Vector2d(3, 3);
         Vector2d emptyPosition = new Vector2d(0, 0);

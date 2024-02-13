@@ -23,10 +23,7 @@ public abstract class AbstractWorldMap implements WorldMap {
         this.observers = new ArrayList<>();
 
     }
-    @Override
-    public int getId(){
-        return mapID;
-    }
+
 
     @Override
     public List<Animal> getOrderedAnimals(){
